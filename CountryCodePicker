@@ -1,0 +1,35 @@
+Add in your xml file
+
+
+ <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+        android:id="@+id/ccp"
+        app:ccp_hideNameCode="true"                                           //Imp to hide country code name
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginLeft="25dp"
+        android:background="@drawable/ic_baseline_rectangle_30"
+        android:gravity="center"
+        app:ccp_defaultNameCode="AE"                                         //To add any selected flag
+        app:layout_constraintBottom_toBottomOf="@id/editText"
+        app:layout_constraintEnd_toStartOf="@+id/view1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/editText"
+       />
+
+  OR
+
+
+  <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+        android:id="@+id/ccp"
+        app:ccp_hideNameCode="true"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginLeft="25dp"
+        android:background="@drawable/ic_baseline_rectangle_30"
+        android:gravity="center"
+        app:ccp_defaultNameCode="AE"
+        app:layout_constraintBottom_toBottomOf="@id/editText"
+        app:layout_constraintEnd_toStartOf="@+id/view1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/editText"
+       />
