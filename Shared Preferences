@@ -1,0 +1,132 @@
+
+
+
+----------------------------------------------------------- main.xml --------------------------------------------------------------
+
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText">
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="32dp"
+        android:text="Register "
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/editext_name"
+        android:hint="Enter Your full Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview"
+        android:layout_margin="20dp"/>
+
+
+    <EditText
+        android:id="@+id/editext_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button20"
+        android:hint="Enter your Email"
+        android:layout_margin="20dp"
+        />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#8BC34A"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:text="Save"/>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------- Main Activity ---------------------------------------------------------
+
+
+Main Activity - 
+
+public class SharedPref extends AppCompatActivity {
+
+     EditText editText_name , editText_email;
+     Button button_save;
+     SharedPreferences sharedPreferences;
+
+
+     private static  final String SHARED_PREF_NAME= "mypref";
+     private static final String KEY_NAME = "name";
+    private static final String KEY_EMAIL = "email";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shared_preference);
+
+        editText_name = findViewById(R.id.editext_name);
+        editText_email = findViewById(R.id.editext_email);
+        button_save = findViewById(R.id.button_save);
+
+
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        
+        String name = sharedPreferences.getString(KEY_NAME,null);
+        if (name != null){
+            Intent intent = new Intent(SharedPref.this,HomeActivity.class);
+            startActivity(intent);
+        }
+
+
+
+     button_save.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+
+             SharedPreferences.Editor editor = sharedPreferences.edit();
+
+
+             editor.putString(KEY_NAME,editText_name.getText().toString());
+             editor.putString(KEY_EMAIL,editText_email.getText().toString());
+             editor.apply();
+
+             Intent intent = new Intent(SharedPref.this,HomeActivity.class);
+             startActivity(intent);
+
+             Toast.makeText(SharedPref.this, "Login Success", Toast.LENGTH_SHORT).show();
+         }
+     });
+
+
+    }
+}
+
+
+
+
