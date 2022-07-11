@@ -1,0 +1,151 @@
+Step 1 -
+
+---------------------------------------- Main Activity -------------------------------------------
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+    }
+
+    public void gotoSecondActivity(View view) {
+
+        User user = new User("John Doe", 26);
+        Parcelable parcelable = Parcels.wrap(user);
+
+        Intent intent = new Intent(this, SecondActivity.class);
+        intent.putExtra("DATE_KEY", parcelable);
+        startActivity(intent);
+
+
+    }
+}
+
+Step 2 -
+
+
+----------------------------------main activity xml -----------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="gotoSecondActivity"
+        android:text="goto second activity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
+
+
+
+Step 3 - --------------------------------User.java (Parceable) -------------------------------------------------------------
+
+
+@Parcel
+public class User {
+
+    String name;
+    int age;
+
+    public User() {
+    }
+
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+
+
+
+
+Sep 4--
+
+
+---------------------------------- Second Activity -------------------------------------------------
+
+public class SecondActivity extends AppCompatActivity {
+
+    private static final String TAG = "SecondActivity";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+
+        Parcelable parcelable = getIntent().getParcelableExtra("DATE_KEY");
+        User user = Parcels.unwrap(parcelable);
+
+        Log.e(TAG, "onCreate: " + user.toString() );
+    }
+}
+
+
+
+
+
+Step 5 -
+
+----------------------------------------- second activity.xml-----------------------------
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecondActivity">
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+
